@@ -40,7 +40,7 @@ public class BinaryControllerTest {
 			.andExpect(model().attribute("operand1Focused", false));
     }
 	
-	    @Test
+	@Test
     public void getParameter() throws Exception {
         this.mvc.perform(get("/").param("operand1","111"))
             .andExpect(status().isOk())
@@ -55,6 +55,114 @@ public class BinaryControllerTest {
             .andExpect(view().name("result"))
 			.andExpect(model().attribute("result", "1110"))
 			.andExpect(model().attribute("operand1", "111"));
+    }
+	
+	@Test
+	public void postAddBinaryNumbers1() throws Exception {
+	this.mvc.perform(post("/").param("operand1","111").param("operator","+").param("operand2","111"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "1110"))
+		.andExpect(model().attribute("operand1", "111"));
+    }
+	
+	@Test
+	public void postAddBinaryNumbers2() throws Exception {
+	this.mvc.perform(post("/").param("operand1","101").param("operator","+").param("operand2","101"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "1010"))
+		.andExpect(model().attribute("operand1", "101"));
+    }
+	
+	@Test
+	public void postAddBinaryNumbers3() throws Exception {
+	this.mvc.perform(post("/").param("operand1","100").param("operator","+").param("operand2","001"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "101"))
+		.andExpect(model().attribute("operand1", "100"));
+    }
+	
+	@Test
+	public void postOrBinaryNumbers1() throws Exception {
+	this.mvc.perform(post("/").param("operand1","111").param("operator","|").param("operand2","111"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "111"))
+		.andExpect(model().attribute("operand1", "111"));
+    }
+	
+	@Test
+	public void postOrBinaryNumbers2() throws Exception {
+	this.mvc.perform(post("/").param("operand1","101").param("operator","|").param("operand2","010"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "111"))
+		.andExpect(model().attribute("operand1", "101"));
+    }
+	
+	@Test
+	public void postOrBinaryNumbers3() throws Exception {
+	this.mvc.perform(post("/").param("operand1","100").param("operator","|").param("operand2","001"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "101"))
+		.andExpect(model().attribute("operand1", "100"));
+    }
+	
+	@Test
+	public void postAndBinaryNumbers1() throws Exception {
+	this.mvc.perform(post("/").param("operand1","111").param("operator","&").param("operand2","111"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "111"))
+		.andExpect(model().attribute("operand1", "111"));
+    }
+	
+	@Test
+	public void postAndBinaryNumbers2() throws Exception {
+	this.mvc.perform(post("/").param("operand1","101").param("operator","&").param("operand2","111"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "101"))
+		.andExpect(model().attribute("operand1", "101"));
+    }
+	
+	@Test
+	public void postAndBinaryNumbers3() throws Exception {
+	this.mvc.perform(post("/").param("operand1","100").param("operator","&").param("operand2","101"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "100"))
+		.andExpect(model().attribute("operand1", "100"));
+    }
+	
+	@Test
+	public void postMultiplyBinaryNumbers1() throws Exception {
+	this.mvc.perform(post("/").param("operand1","111").param("operator","*").param("operand2","111"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "110001"))
+		.andExpect(model().attribute("operand1", "111"));
+    }
+	
+	@Test
+	public void postMultiplyBinaryNumbers2() throws Exception {
+	this.mvc.perform(post("/").param("operand1","101").param("operator","*").param("operand2","111"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "100011"))
+		.andExpect(model().attribute("operand1", "101"));
+    }
+	
+	@Test
+	public void postMultiplyBinaryNumbers3() throws Exception {
+	this.mvc.perform(post("/").param("operand1","100").param("operator","*").param("operand2","101"))//.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(view().name("result"))
+		.andExpect(model().attribute("result", "10100"))
+		.andExpect(model().attribute("operand1", "100"));
     }
 
 }
